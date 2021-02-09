@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="placeholder">
+        <div class="parallax-window" data-parallax="scroll" style="background-image: url('../../../assets/img/simple-house-01.jpg');">
+            <div class="tm-header">
+                <div class="row tm-header-inner">
+                    <div class="col-md-6 col-12">
+                        <img src="../../../assets/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
+                        <div class="tm-site-text-box">
+                            <h1 class="tm-site-title">Simple example</h1>
+                            <h6 class="tm-site-description">Rick & Morty</h6>	
+                        </div>
+                    </div>
+                    <nav class="col-md-6 col-12 tm-nav">
+                        
+                    </nav>	
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header class="row tm-welcome-section">
+            <h2 class="col-12 text-center tm-section-title">Welcome to Rick & Morty Multiverse</h2>
+            <p class="col-12 text-center">2 componets as HTML pages are included in this template with Angular 11. </p>
+        </header>
+        
+        <div class="tm-paging-links">
+            <nav>
+                <ul>
+                    <li class="tm-paging-item"><a href="#tm-gallery-page-list" class="tm-paging-link active" (click)="aOption_Click($event, $event.target)">Characters</a></li>
+                    <li class="tm-paging-item"><a href="#" class="tm-paging-link">Description</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Gallery -->
+        <div class="row tm-gallery">
+            <!-- gallery page 1 -->
+            <div id="tm-gallery-page-list" class="tm-gallery-page" *ngIf="showCharacterList">
+                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item" *ngFor="let character of dataList; let i = index">
+                    <figure>
+                        <img src="{{ character.image }}" alt="Image" class="img-fluid tm-gallery-img" />
+                        <figcaption>
+                            <h4 class="tm-gallery-title">{{character.name}}</h4>
+                            <p class="tm-gallery-description">{{character.species}}</p>
+                            <p class="tm-gallery-price">{{character.status}} - <a  href="#" (click)="aShowDetail_Click($event, $event.target, character.id)">Ver más</a></p> 
+                        </figcaption>
+                    </figure>
+                </article>
+               
+            </div> <!-- gallery page 1 -->
+
+            <div class="tm-section tm-container-inner" *ngIf="showDetails">
+                <cacharacters-details selectedCharacterId="{{selectedId}}"></cacharacters-details>
+			</div>
+        </div>
+      
+    </main>
+
+    <footer class="tm-footer text-center">
+        <p>Copyright &copy; 2020 Rick & Morty
+    </footer>
+</div>
+
+<script>
+    $(document).ready(function(){
+        // Handle click on paging links
+        $('.tm-paging-link').click(function(e){
+            e.preventDefault();
+            
+            var page = $(this).text().toLowerCase();
+            $('.tm-gallery-page').addClass('hidden');
+            $('#tm-gallery-page-' + page).removeClass('hidden');
+            $('.tm-paging-link').removeClass('active');
+            $(this).addClass("active");
+        });
+    });
+</script>
